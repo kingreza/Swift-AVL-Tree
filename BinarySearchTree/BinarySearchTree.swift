@@ -23,10 +23,22 @@ class Node<Element: Comparable> {
     return max(left, right)
   }
 }
+enum BinarySearchTreeError: ErrorType {
+  case OutOfBound
+}
 
 class BinarySearchTree<Element: Comparable>: BinarySearchTreeType {
 
   private var _root: Node<Element>?
+  private var _count: Int = 0
+
+  var root: Node<Element>? {
+    return _root
+  }
+
+  var count: Int {
+    return _count
+  }
 
   func insert (element: Element) {
     if let _ = _root {
@@ -42,12 +54,15 @@ class BinarySearchTree<Element: Comparable>: BinarySearchTreeType {
     }
   }
 
-  func insert(element: Element, inout currentNode: Node<Element>) -> Node<Element> {
+
+
+  private func insert(element: Element, inout currentNode: Node<Element>) -> Node<Element> {
     if currentNode.value > element {
       if currentNode.leftNode != nil {
         currentNode.leftNode = insert(element, currentNode: &currentNode.leftNode!)
       } else {
         currentNode.leftNode = Node<Element>(value: element)
+        _count += 1
       }
       if height(currentNode.leftNode) - height(currentNode.rightNode) == 2 {
         if element < currentNode.leftNode!.value {
@@ -62,6 +77,7 @@ class BinarySearchTree<Element: Comparable>: BinarySearchTreeType {
         currentNode.rightNode = insert(element, currentNode: &currentNode.rightNode!)
       } else {
         currentNode.rightNode = Node<Element>(value: element)
+        _count += 1
       }
 
       if height(currentNode.rightNode) - height(currentNode.leftNode) == 2 {
@@ -72,8 +88,6 @@ class BinarySearchTree<Element: Comparable>: BinarySearchTreeType {
           currentNode = leftRotate(currentNode)
         }
       }
-    } else {
-
     }
     return currentNode
   }
@@ -92,7 +106,7 @@ class BinarySearchTree<Element: Comparable>: BinarySearchTreeType {
     printNodeHeights(_root)
   }
 
-  func printNodeHeights(node: Node<Element>?) {
+  private func printNodeHeights(node: Node<Element>?) {
     if let node = node {
       printNodeHeights(node.leftNode)
       print("for node \(node.value) height is \(node.height)")

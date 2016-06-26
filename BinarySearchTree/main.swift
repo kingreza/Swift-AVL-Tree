@@ -17,7 +17,6 @@ var tree = BinarySearchTree<Int>()
 //  tree.add(rand)
 //}
 
-
 tree.insert(7)
 tree.insert(3)
 tree.insert(4)
@@ -33,4 +32,13 @@ var node = tree.findNode(1)
 tree.printHeight()
 var next = tree.successor(node!)
 print(next!.value)
-print("hellow world")
+
+print("Hello World! Again!")
+
+var result = tree[5]
+
+for value in tree {
+  print(value)
+}
+
+print(result)
