@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		57040FC51D1CFA8C00444E38 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57040FC41D1CFA8C00444E38 /* main.swift */; };
+		57040FCD1D1CFAC000444E38 /* BinarySearchTreeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57040FCC1D1CFAC000444E38 /* BinarySearchTreeType.swift */; };
+		57040FCF1D1CFAD400444E38 /* BinarySearchTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57040FCE1D1CFAD400444E38 /* BinarySearchTree.swift */; };
+		57040FD11D1CFB0D00444E38 /* BinarySearchTree+SequenceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57040FD01D1CFB0D00444E38 /* BinarySearchTree+SequenceType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +28,10 @@
 /* Begin PBXFileReference section */
 		57040FC11D1CFA8C00444E38 /* BinarySearchTree */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BinarySearchTree; sourceTree = BUILT_PRODUCTS_DIR; };
 		57040FC41D1CFA8C00444E38 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		57040FCC1D1CFAC000444E38 /* BinarySearchTreeType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinarySearchTreeType.swift; sourceTree = "<group>"; };
+		57040FCE1D1CFAD400444E38 /* BinarySearchTree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinarySearchTree.swift; sourceTree = "<group>"; };
+		57040FD01D1CFB0D00444E38 /* BinarySearchTree+SequenceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BinarySearchTree+SequenceType.swift"; sourceTree = "<group>"; };
+		57040FD31D1D0BCB00444E38 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +48,7 @@
 		57040FB81D1CFA8C00444E38 = {
 			isa = PBXGroup;
 			children = (
+				57040FD31D1D0BCB00444E38 /* .swiftlint.yml */,
 				57040FC31D1CFA8C00444E38 /* BinarySearchTree */,
 				57040FC21D1CFA8C00444E38 /* Products */,
 			);
@@ -58,6 +66,9 @@
 			isa = PBXGroup;
 			children = (
 				57040FC41D1CFA8C00444E38 /* main.swift */,
+				57040FCC1D1CFAC000444E38 /* BinarySearchTreeType.swift */,
+				57040FCE1D1CFAD400444E38 /* BinarySearchTree.swift */,
+				57040FD01D1CFB0D00444E38 /* BinarySearchTree+SequenceType.swift */,
 			);
 			path = BinarySearchTree;
 			sourceTree = "<group>";
@@ -72,6 +83,7 @@
 				57040FBD1D1CFA8C00444E38 /* Sources */,
 				57040FBE1D1CFA8C00444E38 /* Frameworks */,
 				57040FBF1D1CFA8C00444E38 /* CopyFiles */,
+				57040FCB1D1CFA9800444E38 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -114,12 +126,31 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		57040FCB1D1CFA9800444E38 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		57040FBD1D1CFA8C00444E38 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57040FCD1D1CFAC000444E38 /* BinarySearchTreeType.swift in Sources */,
 				57040FC51D1CFA8C00444E38 /* main.swift in Sources */,
+				57040FCF1D1CFAD400444E38 /* BinarySearchTree.swift in Sources */,
+				57040FD11D1CFB0D00444E38 /* BinarySearchTree+SequenceType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
