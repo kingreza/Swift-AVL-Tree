@@ -45,6 +45,7 @@ class BinarySearchTree<Element: Comparable>: BinarySearchTreeType {
       self.insert(element, currentNode: &_root!)
     } else {
       _root = Node(value: element)
+      _count += 1
     }
   }
 

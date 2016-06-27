@@ -35,10 +35,13 @@ print(next!.value)
 
 print("Hello World! Again!")
 
-var result = tree[5]
-
-for value in tree {
-  print(value)
+for index in 0..<tree.count {
+  print(tree[index])
 }
 
-print(result)
+
+var reverse = tree.reverse()
+
+for value in reverse {
+  print(value)
+}

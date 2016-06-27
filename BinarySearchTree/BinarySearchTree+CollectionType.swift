@@ -23,33 +23,34 @@ extension BinarySearchTree: CollectionType {
   }
 
   private func findItemAtIndexUnsafe(index: Int) -> Node<Element> {
-    var index = index
-    return findItemAtIndex(&index, node: root!)!
+    var currentCount = index
+    var result: Node<Element>?
+    findItemAtIndex(&currentCount, node: root!, result: &result)
+    return result!
   }
 
-  func findItemAtIndex(inout index: Int, node: Node<Element>) -> Node<Element>? {
-    var result: Node<Element>?
-
-    if index == 0 {
-      return node
-    }
+  func findItemAtIndex(inout index: Int, node: Node<Element>, inout result: Node<Element>?) {
 
     if node.leftNode != nil {
-      result = findItemAtIndex(&index, node: node.leftNode!)
+      findItemAtIndex(&index, node: node.leftNode!, result: &result)
     }
 
+    if index == 0 {
+      result = node
+    }
     index -= 1
-    if node.rightNode != nil {
-      result = findItemAtIndex(&index, node: node.rightNode!)
-    }
 
-    return result
+    if node.rightNode != nil {
+      findItemAtIndex(&index, node: node.rightNode!, result: &result)
+    }
   }
 
   func findItemAtIndex(index: Int) throws -> Node<Element> {
     if let root = root {
       var index = index
-      if let result = findItemAtIndex(&index, node: root) {
+      var result: Node<Element>?
+      findItemAtIndex(&index, node: root, result: &result)
+      if let result = result {
         return result
       }
     }
