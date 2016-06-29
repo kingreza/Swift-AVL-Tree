@@ -12,6 +12,7 @@
 		57040FCF1D1CFAD400444E38 /* BinarySearchTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57040FCE1D1CFAD400444E38 /* BinarySearchTree.swift */; };
 		57040FD11D1CFB0D00444E38 /* BinarySearchTree+SequenceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57040FD01D1CFB0D00444E38 /* BinarySearchTree+SequenceType.swift */; };
 		57040FD51D20800600444E38 /* BinarySearchTree+CollectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57040FD41D20800600444E38 /* BinarySearchTree+CollectionType.swift */; };
+		57040FDB1D21559300444E38 /* BinarySearchTree+ArrayLiteralConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57040FDA1D21559300444E38 /* BinarySearchTree+ArrayLiteralConvertible.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -34,6 +35,7 @@
 		57040FD01D1CFB0D00444E38 /* BinarySearchTree+SequenceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BinarySearchTree+SequenceType.swift"; sourceTree = "<group>"; };
 		57040FD31D1D0BCB00444E38 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
 		57040FD41D20800600444E38 /* BinarySearchTree+CollectionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BinarySearchTree+CollectionType.swift"; sourceTree = "<group>"; };
+		57040FDA1D21559300444E38 /* BinarySearchTree+ArrayLiteralConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BinarySearchTree+ArrayLiteralConvertible.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 				57040FCE1D1CFAD400444E38 /* BinarySearchTree.swift */,
 				57040FD01D1CFB0D00444E38 /* BinarySearchTree+SequenceType.swift */,
 				57040FD41D20800600444E38 /* BinarySearchTree+CollectionType.swift */,
+				57040FDA1D21559300444E38 /* BinarySearchTree+ArrayLiteralConvertible.swift */,
 			);
 			path = BinarySearchTree;
 			sourceTree = "<group>";
@@ -154,6 +157,7 @@
 				57040FD51D20800600444E38 /* BinarySearchTree+CollectionType.swift in Sources */,
 				57040FC51D1CFA8C00444E38 /* main.swift in Sources */,
 				57040FCF1D1CFAD400444E38 /* BinarySearchTree.swift in Sources */,
+				57040FDB1D21559300444E38 /* BinarySearchTree+ArrayLiteralConvertible.swift in Sources */,
 				57040FD11D1CFB0D00444E38 /* BinarySearchTree+SequenceType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

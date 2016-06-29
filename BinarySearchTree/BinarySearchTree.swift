@@ -23,11 +23,12 @@ class Node<Element: Comparable> {
     return max(left, right)
   }
 }
+
 enum BinarySearchTreeError: ErrorType {
   case OutOfBound
 }
 
-class BinarySearchTree<Element: Comparable>: BinarySearchTreeType {
+final class BinarySearchTree<Element: Comparable>: BinarySearchTreeType {
 
   private var _root: Node<Element>?
   private var _count: Int = 0
@@ -35,11 +36,15 @@ class BinarySearchTree<Element: Comparable>: BinarySearchTreeType {
   var root: Node<Element>? {
     return _root
   }
-
   var count: Int {
     return _count
   }
 
+  /**
+   Inserts an element into the AVL tree. Duplicate elements are ignored.
+   - parameter element: Element which will be added to the tree.
+   It must conform to Comparable.
+   */
   func insert (element: Element) {
     if let _ = _root {
       self.insert(element, currentNode: &_root!)
@@ -48,14 +53,6 @@ class BinarySearchTree<Element: Comparable>: BinarySearchTreeType {
       _count += 1
     }
   }
-
-  func printHeight() {
-    if let root = _root {
-      print(root.height)
-    }
-  }
-
-
 
   private func insert(element: Element, inout currentNode: Node<Element>) -> Node<Element> {
     if currentNode.value > element {
@@ -103,17 +100,6 @@ class BinarySearchTree<Element: Comparable>: BinarySearchTreeType {
   private func height (node: Node<Element>?) -> Int {
     return node != nil ? node!.height : -1
   }
-  func printNodeHeights() {
-    printNodeHeights(_root)
-  }
-
-  private func printNodeHeights(node: Node<Element>?) {
-    if let node = node {
-      printNodeHeights(node.leftNode)
-      print("for node \(node.value) height is \(node.height)")
-      printNodeHeights(node.rightNode)
-    }
-  }
 
   private func leftRotate(node: Node<Element>) -> Node<Element> {
     let newRoot = node.rightNode!
@@ -131,7 +117,12 @@ class BinarySearchTree<Element: Comparable>: BinarySearchTreeType {
     return newRoot
   }
 
-  private func minNode (root: Node<Element>) -> Node<Element> {
+  /**
+   Returns element with the smallest value in the tree.
+   - parameter root: Root node for the tree.
+   - returns: Node with the smallest value
+   */
+  func minNode (root: Node<Element>) -> Node<Element> {
     var _current = root
     while _current.leftNode != nil {
       _current = _current.leftNode!
@@ -139,12 +130,60 @@ class BinarySearchTree<Element: Comparable>: BinarySearchTreeType {
     return _current
   }
 
+  /**
+   Returns element with the largest value in the tree.
+   - parameter root: Root node for the tree.
+   - returns: Node with the largest value
+   */
+  func maxNode(root: Node<Element>) -> Node<Element> {
+      var _current = root
+      while _current.rightNode != nil {
+        _current = _current.rightNode!
+      }
+      return _current
+  }
+  /**
+   Returns the predecessor element of a given element according to in-order traversal of the tree.
+   - parameter node: Node from which want the predecessor.
+   - returns: Predecessor for the node passed as a parameter
+   */
+  func predecessor(node: Node<Element>) -> Node<Element>? {
+    if let root = _root {
+      return self.predecessor(node, root: root)
+    }
+    return nil
+  }
+
+  private func predecessor(node: Node<Element>, root: Node<Element>) -> Node<Element>? {
+    if let leftSubTree = node.leftNode {
+      return maxNode(leftSubTree)
+    }
+
+    var _current: Node<Element>? = root
+    var result: Node<Element>?
+    while _current != nil {
+      if _current!.value > node.value {
+        _current = _current?.leftNode
+      } else if _current!.value < node.value {
+        result = _current
+        _current = _current!.rightNode
+      } else {
+        return result
+      }
+    }
+    return result
+  }
+
+  /**
+   Returns the successor element of a given element according to in-order traversal of the tree.
+   - parameter node: Node from which we want the successor.
+   - returns: Predecessor for the node passed as a parameter
+   */
   func successor(node: Node<Element>) -> Node<Element>? {
     if let root = _root {
       return successor(node, root: root)
     }
     return nil
-
   }
 
   private func successor(node: Node<Element>, root: Node<Element>) -> Node<Element>? {
@@ -167,13 +206,26 @@ class BinarySearchTree<Element: Comparable>: BinarySearchTreeType {
     }
     return result
   }
+  /**
+   Finds an element in the AVL tree. Since the tree is self-balancing,
+   this lookup will always be a O(lg n) operation.
 
+   - parameter element: Element we want to find in the tree
+   - returns: Element if it is found, nil otherwise.
+   */
   func find(element: Element) -> Element? {
     if let node = self.findNode(element) {
       return node.value
     }
     return nil
   }
+  /**
+   Finds the node for an element in the AVL tree. Since the tree
+   is self-balancing, this lookup will always be a O(lg n) operation.
+
+   - parameter element: Element we want to find in the tree
+   - returns: Node of the element if it is found, nil otherwise.
+   */
 
   func findNode(element: Element) -> Node<Element>? {
     return findNode(element, node: _root)
