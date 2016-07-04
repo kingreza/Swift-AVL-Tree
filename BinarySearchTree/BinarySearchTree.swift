@@ -18,8 +18,8 @@ class Node<Element: Comparable> {
   }
 
   var height: Int {
-    let left = leftNode != nil ? leftNode!.height + 1 : 0
-    let right = rightNode != nil ? rightNode!.height + 1: 0
+    let left = leftNode?.height ?? 0
+    let right = rightNode?.height ?? 0
     return max(left, right)
   }
 }
@@ -30,15 +30,9 @@ enum BinarySearchTreeError: ErrorType {
 
 final class BinarySearchTree<Element: Comparable>: BinarySearchTreeType {
 
-  private var _root: Node<Element>?
-  private var _count: Int = 0
+  private(set) var root: Node<Element>?
+  private(set) var count: Int = 0
 
-  var root: Node<Element>? {
-    return _root
-  }
-  var count: Int {
-    return _count
-  }
 
   /**
    Inserts an element into the AVL tree. Duplicate elements are ignored.
@@ -46,21 +40,22 @@ final class BinarySearchTree<Element: Comparable>: BinarySearchTreeType {
    It must conform to Comparable.
    */
   func insert (element: Element) {
-    if let _ = _root {
-      self.insert(element, currentNode: &_root!)
+    if let node = root {
+      self.insert(element, currentNode: node)
     } else {
-      _root = Node(value: element)
-      _count += 1
+      root = Node(value: element)
+      count += 1
     }
   }
 
-  private func insert(element: Element, inout currentNode: Node<Element>) -> Node<Element> {
+  private func insert(element: Element, currentNode: Node<Element>) -> Node<Element> {
+    var currentNode = currentNode
     if currentNode.value > element {
       if currentNode.leftNode != nil {
-        currentNode.leftNode = insert(element, currentNode: &currentNode.leftNode!)
+        currentNode.leftNode = insert(element, currentNode: currentNode.leftNode!)
       } else {
         currentNode.leftNode = Node<Element>(value: element)
-        _count += 1
+        count += 1
       }
       if height(currentNode.leftNode) - height(currentNode.rightNode) == 2 {
         if element < currentNode.leftNode!.value {
@@ -72,10 +67,10 @@ final class BinarySearchTree<Element: Comparable>: BinarySearchTreeType {
       }
     } else if currentNode.value < element {
       if currentNode.rightNode != nil {
-        currentNode.rightNode = insert(element, currentNode: &currentNode.rightNode!)
+        currentNode.rightNode = insert(element, currentNode: currentNode.rightNode!)
       } else {
         currentNode.rightNode = Node<Element>(value: element)
-        _count += 1
+        count += 1
       }
 
       if height(currentNode.rightNode) - height(currentNode.leftNode) == 2 {
@@ -98,7 +93,7 @@ final class BinarySearchTree<Element: Comparable>: BinarySearchTreeType {
   }
 
   private func height (node: Node<Element>?) -> Int {
-    return node != nil ? node!.height : -1
+    return node?.height ?? -1
   }
 
   private func leftRotate(node: Node<Element>) -> Node<Element> {
@@ -124,8 +119,8 @@ final class BinarySearchTree<Element: Comparable>: BinarySearchTreeType {
    */
   func minNode (root: Node<Element>) -> Node<Element> {
     var _current = root
-    while _current.leftNode != nil {
-      _current = _current.leftNode!
+    while let lNode =  _current.leftNode {
+      _current = lNode
     }
     return _current
   }
@@ -136,11 +131,11 @@ final class BinarySearchTree<Element: Comparable>: BinarySearchTreeType {
    - returns: Node with the largest value
    */
   func maxNode(root: Node<Element>) -> Node<Element> {
-      var _current = root
-      while _current.rightNode != nil {
-        _current = _current.rightNode!
-      }
-      return _current
+    var _current = root
+    while let rNode = _current.rightNode {
+      _current = rNode
+    }
+    return _current
   }
   /**
    Returns the predecessor element of a given element according to in-order traversal of the tree.
@@ -148,7 +143,7 @@ final class BinarySearchTree<Element: Comparable>: BinarySearchTreeType {
    - returns: Predecessor for the node passed as a parameter
    */
   func predecessor(node: Node<Element>) -> Node<Element>? {
-    if let root = _root {
+    if let root = root {
       return self.predecessor(node, root: root)
     }
     return nil
@@ -180,7 +175,7 @@ final class BinarySearchTree<Element: Comparable>: BinarySearchTreeType {
    - returns: Predecessor for the node passed as a parameter
    */
   func successor(node: Node<Element>) -> Node<Element>? {
-    if let root = _root {
+    if let root = root {
       return successor(node, root: root)
     }
     return nil
@@ -228,7 +223,7 @@ final class BinarySearchTree<Element: Comparable>: BinarySearchTreeType {
    */
 
   func findNode(element: Element) -> Node<Element>? {
-    return findNode(element, node: _root)
+    return findNode(element, node: root)
   }
 
   private func findNode(element: Element, node: Node<Element>?) -> Node<Element>? {

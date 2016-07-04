@@ -21,7 +21,7 @@ extension BinarySearchTree: SequenceType {
           _current = self.minNode(self.root!)
         }
       }
-      return _current != nil ? _current?.value : nil
+      return _current?.value ?? nil
     }
   }
 }

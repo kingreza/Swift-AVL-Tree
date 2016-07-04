@@ -31,8 +31,8 @@ extension BinarySearchTree: CollectionType {
 
   func findItemAtIndex(inout index: Int, node: Node<Element>, inout result: Node<Element>?) {
 
-    if node.leftNode != nil {
-      findItemAtIndex(&index, node: node.leftNode!, result: &result)
+    if let lNode = node.leftNode {
+      findItemAtIndex(&index, node: lNode, result: &result)
     }
 
     if index == 0 {
@@ -40,8 +40,8 @@ extension BinarySearchTree: CollectionType {
     }
     index -= 1
 
-    if node.rightNode != nil {
-      findItemAtIndex(&index, node: node.rightNode!, result: &result)
+    if let rNode = node.rightNode {
+      findItemAtIndex(&index, node: rNode, result: &result)
     }
   }
 
