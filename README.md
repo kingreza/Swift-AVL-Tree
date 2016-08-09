@@ -4,10 +4,11 @@ A generic self balancing AVL tree with SequenceType, CollectionType and ArrayLit
 ## Usage Example:
 
 ```swift
-//Create tree with associated type (must implement Comparable)
+/* 
+  Create tree with associated type (must implement Comparable) */
 var tree = BinarySearchTree<Int>()
 
-//Insert items, tree will balance for optimal retrieval
+/* Insert items, tree will balance for optimal retrieval */
 tree.insert(7)
 tree.insert(3)
 tree.insert(4)
@@ -41,9 +42,9 @@ for value in reverse {
 }
 
 /*
- You can build a tree by simple assigning an array to it 
+ You can build a tree by simply assigning an array to it 
  instead of inserting elements one by one 
- [Benefit of ArrayLiteralConvertible Protocl] */
+ [Benefit of ArrayLiteralConvertible Protcol] */
 
 var newTree: BinarySearchTree = ["hello", "world", "this", "is", "a", "new", "day"]
 
